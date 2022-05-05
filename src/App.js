@@ -3,13 +3,16 @@ import './App.scss';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Shop from './components/Shop';
-import { useState } from 'react';
+import { ContextProvider } from "./contex"
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Shop />
+      <ContextProvider>
+        <Shop />
+      </ContextProvider>
+
       <Footer />
 
     </div>

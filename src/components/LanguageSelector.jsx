@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LangCodes } from '../config';
- const LanguageSelector = ({setLang = Function.prototype}) => {
+import { ShopContext } from '../contex';
+ const LanguageSelector = () => {
+	const {setLang} = useContext(ShopContext)
 	const [selectedValue,setSelectedValue] = useState({
 		langCode: 'en',
 		langFlag: '',

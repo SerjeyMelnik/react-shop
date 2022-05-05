@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ShopContext } from '../contex';
 import OrderList from './OrderList';
 
-const Cart = ({order,setOrder}) => {
-	const [dropedOrder,setDropedOrder] = useState(false)
-	const hideOrder = (e) => {
-		if (e.target.dataset.close) setDropedOrder(false);
-	}
-	const dropOrder = (e) => {
-		if (order.length > 0) setDropedOrder(true);
-	}
-	const removeFromCart = (id) => {
-		setOrder([...order.filter(prod => prod.mainId != id)])
-		if (![...order.filter(prod => prod.mainId != id)].length) setDropedOrder(false);
-	}
+const Cart = () => {
+	
+	 const {hideOrder,dropOrder,dropedOrder,order} = useContext(ShopContext)
+	 
 	
 	return ( 
 		<div className="shopping_cart" >
@@ -24,10 +17,7 @@ const Cart = ({order,setOrder}) => {
 				<div className="order_inner">
 					<i className='material-icons order_hide' onClick={hideOrder} data-close={true}>close</i>
 					<h2 className='order_title'>Your order</h2>
-					<OrderList order={order} 
-								setOrder={setOrder} 
-								removeFromCart={removeFromCart}
-								setDropedOrder={setDropedOrder} />
+					<OrderList  />
 					<div className="order_total-info">
 						<div className="order_total-info_item">
 							<span className='total-title'>Total price: </span>

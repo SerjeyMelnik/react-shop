@@ -1,18 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShopContext } from '../contex';
 
-const OrderList = ({order,removeFromCart,setOrder,setDropedOrder}) => {
-	const changeItemCount = (count,id,step) => {
-	
-		setOrder(order.map(item => 
-				item.mainId === id ? 
-				{...item,count: (Number(count) + step) > 0 ? Number(count) + step : 0 } :
-				 item).filter(item => item.count !== 0) )
-			console.log(order.length === 0);
-		if (order.length === 1 && order[0].count - 1 === 0 && step < 0) setDropedOrder(false);
-		
-			
-	}
-	
+const OrderList = () => {
+	const {removeFromCart,changeItemCount,order} = useContext(ShopContext)
+
+
 	return ( 
 		<div className="order_list">		
 		{
@@ -23,7 +15,7 @@ const OrderList = ({order,removeFromCart,setOrder,setDropedOrder}) => {
 				let itemPrice = ord.price.finalPrice;
 				let itemCount = ord.count;
 				return <div key={ord.mainId + indx} className="order_list-item">
-					{/* <span className='order_list-item_num'>{indx + 1}</span> */}
+					
 					<img src={itemImg} className="order_list-item_img" alt="itemName"  />
 					<span className='order_list-item_name'>{itemName}</span>
 					<span className='order_list-item_price for_one'>

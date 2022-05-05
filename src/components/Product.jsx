@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from "react-slick"
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import BuyMessage from './BuyMessage';
+import { ShopContext } from '../contex';
 const Product = (props) => {
 	const {mainId,displayName,displayDescription,displayAssets,price} = props.product;
-	const addToCart = props.addToCart;
-	const showingMessage = props.showingMessage
-	const setShowingMessage = props.setShowingMessage
-	console.log(price.finalPrice, price.regularPrice);
+
+	const {addToCart,showingMessage,} = useContext(ShopContext)
 	const settings = {
 		dots: true,
 		autoplay: true
@@ -19,7 +18,7 @@ const Product = (props) => {
 		displayName:displayName,
 		displayAssets:displayAssets,
 		price:price,
-		count:1
+		count: 1
 	}
 	const getDiscount = (newPrice,oldPrice) =>{
 		const discount = ((oldPrice - newPrice) * 100) / oldPrice;
@@ -75,8 +74,7 @@ const Product = (props) => {
 					<div className="product_buy-button_wrapper">
 						{
 							showingMessage === mainId ?
-							<BuyMessage showingMessage={showingMessage}
-										setShowingMessage={setShowingMessage}/> : 
+							<BuyMessage /> : 
 							null
 						}
 					
